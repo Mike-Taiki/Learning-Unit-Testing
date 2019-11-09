@@ -56,3 +56,25 @@ describe("getProduct", () => {
     expect(result).toMatchObject({ id: 1, price: 10 });
   });
 });
+
+describe("greet", () => {
+  it("should throw if username is falsy", () => {
+    // Null
+    // undefined
+    // NaN
+    // ''
+    // 0
+    const args = [null, undefined, NaN, "", 0, false];
+    args.forEach(a => {
+      expect(() => {
+        lib.registerUser(a);
+      }).toThrow();
+    });
+  });
+
+  it("shjoul return a user object if valid username is passed", () => {
+    const result = lib.registerUser("mosh");
+    expect(result).toMatchObject({ username: "mosh" });
+    expect(result.id).toBeGreaterThan(0);
+  });
+});
