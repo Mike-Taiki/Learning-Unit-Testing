@@ -24,3 +24,35 @@ describe("greet", () => {
     expect(result).toContain("Mosh");
   });
 });
+
+describe("getCurrencies", () => {
+  it("should return supported currencies", () => {
+    const result = lib.getCurrencies();
+
+    // Too general
+    expect(result).toBeDefined();
+    expect(result).not.toBeNull();
+
+    // Too specific
+    expect(result[0]).toBe("USD");
+    expect(result[1]).toBe("AUD");
+    expect(result[2]).toBe("EUR");
+    expect(result.length).toBe(3);
+
+    // Proper way
+    expect(result).toContain("USD");
+    expect(result).toContain("AUD");
+    expect(result).toContain("EUR");
+
+    // Ideal way
+    expect(result).toEqual(expect.arrayContaining(["EUR", "USD", "AUD"]));
+  });
+});
+
+describe("getProduct", () => {
+  it("should return the product with the given id", () => {
+    const result = lib.getProduct(1);
+    // expect(result).toEqual({ id: 1, price: 10 });
+    expect(result).toMatchObject({ id: 1, price: 10 });
+  });
+});
